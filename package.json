@@ -1,0 +1,31 @@
+{
+  "name": "open-fretboard",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Free and open-source guitar fretboard visualizer: scales, chords, CAGED and chord finder.",
+  "license": "GPL-3.0-or-later",
+  "author": "Arthur (ArthurNTI)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "icons": "pwa-assets-generator --preset minimal-2023 public/logo.svg"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tonal": "^6.5.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vite-pwa/assets-generator": "^2.0.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.0.5"
+  }
+}

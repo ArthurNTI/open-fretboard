@@ -1,0 +1,439 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ * Open Fretboard styles: light/dark tokens, controls and the SVG neck.
+ * Author: Arthur (ArthurNTI) · Created: 2026-10-28 */
+
+:root {
+  --bg: #f7f4ef;
+  --surface: #ffffff;
+  --text: #1f1a14;
+  --muted: #6b6257;
+  --border: #e3ddd3;
+  --chip: #efe9df;
+  --accent: #c2410c;
+  --accent-text: #ffffff;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15120f;
+    --surface: #1f1b17;
+    --text: #f1ebe2;
+    --muted: #a39887;
+    --border: #342e27;
+    --chip: #2a241f;
+    --accent: #fb923c;
+    --accent-text: #1a1209;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ---------------------------------------------------------------- header */
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+
+.brand p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.modes {
+  display: flex;
+  gap: 2px;
+  margin: 14px 0 12px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.modes button {
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.modes button.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- controls */
+
+.settings {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.settings summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.settings-grid,
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 18px;
+}
+
+.settings-grid {
+  padding: 12px 0 4px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.field > span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+select {
+  min-height: 38px;
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.segmented button {
+  min-height: 38px;
+  padding: 6px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.segmented button.active {
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.segmented.roots {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(36px, 1fr));
+}
+
+.segmented.roots button {
+  padding: 6px 0;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  cursor: pointer;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.btn {
+  min-height: 38px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn.primary {
+  border-color: transparent;
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ---------------------------------------------------------------- info */
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0 12px;
+}
+
+.headline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.symbol {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.voicing-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.frets-code {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--chip);
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+
+.tones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tone {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tone span {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.notice,
+.hint,
+.aka {
+  margin: 0;
+}
+
+.notice {
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  background: var(--chip);
+}
+
+.hint,
+.aka {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------------------------------------------------------------- neck */
+
+.board {
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.scroller {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.neck {
+  display: block;
+  height: auto;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.neck-horizontal {
+  width: 100%;
+}
+
+.neck-vertical {
+  width: min(100%, 380px);
+  margin: 0 auto;
+}
+
+.neck text {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.inlay {
+  fill: rgba(255, 255, 255, 0.16);
+}
+
+.fret-wire {
+  stroke: #b9b4ab;
+  stroke-width: 2;
+}
+
+.nut {
+  stroke: #ece6d6;
+  stroke-width: 6;
+}
+
+.string {
+  stroke: #d9d2c3;
+}
+
+.neck .string-name {
+  fill: var(--muted);
+  font-size: 11px;
+}
+
+.neck .fret-number {
+  fill: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.neck .fret-number.strong {
+  fill: var(--text);
+  font-weight: 700;
+}
+
+.neck .muted-x {
+  fill: #e5484d;
+  font-size: 18px;
+}
+
+.neck .region-label {
+  fill: #ffffff;
+  font-size: 9px;
+}
+
+.behind-capo {
+  fill: rgba(0, 0, 0, 0.45);
+}
+
+.capo {
+  fill: #262626;
+  stroke: #8a8a8a;
+  stroke-width: 1;
+}
+
+.dot {
+  pointer-events: none;
+}
+
+.hit {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.hit:hover {
+  fill: rgba(255, 255, 255, 0.07);
+}
+
+.foot {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .app {
+    padding: 12px 16px;
+  }
+
+  .modes button {
+    padding: 10px 9px;
+  }
+
+  .segmented.roots {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .field:has(.roots),
+  .field:has(select) {
+    flex: 1 1 100%;
+  }
+
+  .symbol {
+    font-size: 22px;
+  }
+}
